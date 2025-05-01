@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="854.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.example.barber.AgendarClienteController">
+    <children>
+        <Label layoutX="315.0" layoutY="55.0" prefHeight="54.0" prefWidth="245.0" style="-fx-font-size: 25px;" text="Agendar Cliente" />
+
+        <Label layoutX="270.0" layoutY="156.0" style="-fx-font-size: 15;" text="Nome:" />
+        <TextField fx:id="nomeClienteField" layoutX="337.0" layoutY="154.0" prefHeight="25.0" prefWidth="267.0" />
+
+        <Label layoutX="270.0" layoutY="206.0" style="-fx-font-size: 15;" text="Data:" />
+        <DatePicker fx:id="dataPicker" layoutX="337.0" layoutY="204.0" />
+
+        <Label layoutX="270.0" layoutY="256.0" style="-fx-font-size: 15;" text="Hora:" />
+        <Spinner fx:id="horaSpinner" layoutX="337.0" layoutY="254.0" prefWidth="100" />
+
+        <Button layoutX="337.0" layoutY="319.0" onAction="#agendarCliente" prefHeight="35.0" prefWidth="100.0" text="Agendar" />
+        <Button layoutX="499.0" layoutY="319.0" onAction="#voltarMenu" prefHeight="35.0" prefWidth="100.0" text="Voltar" />
+    </children>
+</AnchorPane>
