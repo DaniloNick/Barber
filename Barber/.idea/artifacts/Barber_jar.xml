@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Barber:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Barber_jar</output-path>
+    <root id="archive" name="Barber.jar">
+      <element id="module-output" name="Barber" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/17.0.6/javafx-base-17.0.6-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/17.0.6/javafx-controls-17.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/17.0.6/javafx-fxml-17.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.36.0.3/sqlite-jdbc-3.36.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/17.0.6/javafx-fxml-17.0.6-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/17.0.6/javafx-controls-17.0.6-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/17.0.6/javafx-base-17.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/17.0.6/javafx-graphics-17.0.6-win.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.base.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.controls.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.fxml.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.graphics.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.media.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.properties" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.swing.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx.web.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/javafx-swt.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/jdk.jsobject.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/jfx.incubator.input.jar" />
+      <element id="file-copy" path="$USER_HOME$/OneDrive/Área de Trabalho/Barber/lib/jfx.incubator.richtext.jar" />
+    </root>
+  </artifact>
+</component>
