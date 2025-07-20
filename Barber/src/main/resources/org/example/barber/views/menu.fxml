@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.MenuController">
+
+    <children>
+          <Button layoutX="182.0" layoutY="123.0" onAction="#abrirServico" prefHeight="50.0" prefWidth="200" text="Novo Atendimento" />
+          <Button layoutX="182.0" layoutY="197.0" onAction="#abrirCadastro" prefHeight="50.0" prefWidth="200" text="Cadastro de Cliente" />
+          <Button layoutX="182.0" layoutY="270.0" onAction="#abrirAgendamento" prefHeight="50.0" prefWidth="200" text="Agendamentos" />
+          <Button layoutX="433.0" layoutY="123.0" onAction="#abrirConsulta" prefHeight="50.0" prefWidth="200" text="Consulta" />
+        <Button layoutX="433.0" layoutY="197.0" mnemonicParsing="false" onAction="#relatorios" prefHeight="50.0" prefWidth="200.0" text="Relatorios" />
+        <Button layoutX="433.0" layoutY="270.0" mnemonicParsing="false" onAction="#genrenciarServico" prefHeight="50.0" prefWidth="200.0" text="Gerenciar Serviços" />
+        <Button layoutX="182.0" layoutY="338.0" mnemonicParsing="false" onAction="#gerenciarUsuarios" prefHeight="50.0" prefWidth="200.0" text="Gerenciar Usuarios" />
+          <Button fx:id="btnSair" layoutX="43.0" layoutY="410.0" onAction="#voltarLogin" prefHeight="37.0" prefWidth="119.0" text="Sair" />
+
+
+      <Label fx:id="avisoMenu" alignment="CENTER" layoutX="263.0" layoutY="410.0" prefHeight="37.0" prefWidth="326.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="userNameMenu" layoutX="37.0" layoutY="42.0" prefHeight="50.0" prefWidth="278.0" text="Nome do Usuario">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      
+    </children>
+</AnchorPane>

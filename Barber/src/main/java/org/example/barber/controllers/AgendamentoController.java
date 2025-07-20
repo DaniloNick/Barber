@@ -1,6 +1,7 @@
-package org.example.barber;
+package org.example.barber.controllers;
 
 import javafx.fxml.FXML;
+import org.example.barber.Application;
 
 public class AgendamentoController {
     @FXML

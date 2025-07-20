@@ -6,12 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.CadastroController">
+<AnchorPane prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.CadastroController">
 
     <children>
           <Label layoutX="295.0" layoutY="51.0" prefHeight="58.0" prefWidth="265.0" style="-fx-font-size: 25px; -fx-font-weight: bold;" text="Cadastro de Cliente" />
-        <VBox layoutX="277.0" layoutY="120.0" spacing="15">
+        <VBox layoutX="277.0" layoutY="109.0" spacing="15">
             <children>
 
                 <TextField fx:id="nomeField" prefHeight="30.0" prefWidth="300" promptText="Nome completo" />
@@ -29,5 +30,10 @@
                 <Insets bottom="20" left="0" right="0" top="20" />
             </padding>
         </VBox>
+      <Label fx:id="avisoCadastroCliente" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="408.0" prefHeight="40.0" prefWidth="391.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

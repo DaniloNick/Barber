@@ -1,7 +1,11 @@
-package org.example.barber;
+package org.example.barber.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.example.barber.Application;
+import org.example.barber.DAO.ClienteDAO;
+import org.example.barber.entities.Cliente;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,6 +15,7 @@ public class CadastroController {
     @FXML private TextField nomeField;
     @FXML private TextField telefoneField;
     @FXML private TextField dataNascimentoField;
+    @FXML private Label avisoCadastroCliente;
 
     @FXML
     public void initialize() {
@@ -41,7 +46,7 @@ public class CadastroController {
         String dataStr = dataNascimentoField.getText();
 
         if (nome.isEmpty() || telefone.isEmpty() || dataStr.isEmpty()) {
-            mostrarAlerta("Erro", "Todos os campos devem ser preenchidos.");
+            avisoCadastroCliente.setText("Todos os campos devem ser preenchidos.");
             return;
         }
 
@@ -50,25 +55,21 @@ public class CadastroController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             data = LocalDate.parse(dataStr, formatter);
         } catch (DateTimeParseException e) {
-            mostrarAlerta("Erro", "Por favor, insira a data no formato correto (DD/MM/AAAA).");
+            avisoCadastroCliente.setText("Por favor, insira a data no formato correto (DD/MM/AAAA).");
             return;
         }
 
         Cliente novo = new Cliente(nome, telefone, data);
-        Repositorio.adicionarCliente(novo);
-        mostrarAlerta("Sucesso", "Cliente cadastrado com sucesso!");
 
-        nomeField.clear();
-        telefoneField.clear();
-        dataNascimentoField.clear();
-    }
-
-    private void mostrarAlerta(String titulo, String mensagem) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensagem);
-        alerta.showAndWait();
+        boolean sucesso = ClienteDAO.inserir(novo);
+        if (sucesso) {
+            avisoCadastroCliente.setText("Cliente cadastrado com sucesso!");
+            nomeField.clear();
+            telefoneField.clear();
+            dataNascimentoField.clear();
+        } else {
+            avisoCadastroCliente.setText("Erro ao cadastrar cliente.");
+        }
     }
 
     @FXML

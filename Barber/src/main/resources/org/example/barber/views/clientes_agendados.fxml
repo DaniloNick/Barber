@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.ClientesAgendadosController">
+
+    <children>
+        <!-- Título -->
+        <Label layoutX="322.0" layoutY="29.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Clientes Agendados" />
+
+        <!-- Lista de agendamentos -->
+        <ListView fx:id="agendamentosListView" layoutX="126.0" layoutY="130.0" prefHeight="272.0" prefWidth="275.0" />
+
+        <!-- Label e campo de data -->
+        <Label layoutX="476.0" layoutY="157.0" style="-fx-font-size: 17;" text="Data:" />
+        <DatePicker fx:id="dataPicker" layoutX="533.0" layoutY="157.0" prefHeight="25.0" prefWidth="231.0" />
+
+        <!-- Label e campo de hora -->
+        <Label layoutX="475.0" layoutY="208.0" style="-fx-font-size: 17;" text="Hora:" />
+        <ComboBox fx:id="horaComboBox" layoutX="533.0" layoutY="208.0" prefHeight="25.0" prefWidth="231.0" />
+
+        <!-- Botão Editar -->
+        <Button fx:id="editarButton" layoutX="579.0" layoutY="259.0" onAction="#editarAgendamento" prefHeight="37.0" prefWidth="142.0" text="Atualizar Agendamento" />
+
+        <!-- Botão Remover -->
+        <Button fx:id="removerButton" layoutX="579.0" layoutY="318.0" onAction="#removerAgendamento" prefHeight="37.0" prefWidth="142.0" text="Remover Agendamento" />
+
+        <!-- Botão Voltar -->
+        <Button layoutX="40.0" layoutY="434.0" onAction="#voltarMenu" prefHeight="37.0" prefWidth="142.0" text="Voltar" />
+
+        <Label fx:id="avisoClientesAgendados" alignment="CENTER" layoutX="216.0" layoutY="434.0" prefHeight="37.0" prefWidth="443.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+
+        <!-- Campo de Busca -->
+        <TextField fx:id="buscarNomeTextField" layoutX="126.0" layoutY="95.0" prefHeight="25.0" prefWidth="275.0" />
+
+        <!-- Label Nome -->
+        <Label layoutX="75.0" layoutY="97.0" text="Nome:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+
+        <Label alignment="CENTER" layoutX="502.0" layoutY="97.0" prefHeight="21.0" prefWidth="275.0" text="Editar / Remover Agendamento">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

@@ -5,8 +5,9 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.LoginController">
+<AnchorPane prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.LoginController">
    <children>
       <TextField fx:id="username" layoutX="302.0" layoutY="202.0" prefHeight="30.0" prefWidth="250.0" />
       <PasswordField fx:id="password" layoutX="302.0" layoutY="263.0" prefHeight="30.0" prefWidth="250.0" />
@@ -14,5 +15,9 @@
       <Label layoutX="302.0" layoutY="172.0" style="-fx-font-size: 14;" text="Usuario" />
       <Label layoutX="302.0" layoutY="240.0" style="-fx-font-size: 14;" text="Senha" />
       <Label layoutX="249.0" layoutY="83.0" style="-fx-font-size: 30;" text="Bem-vindo ao Barber Shop" />
+      <Label fx:id="msgLogin" alignment="CENTER" layoutX="277.0" layoutY="391.0" prefHeight="45.0" prefWidth="301.0" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
    </children>
 </AnchorPane>

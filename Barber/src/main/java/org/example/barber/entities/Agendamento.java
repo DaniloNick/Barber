@@ -1,4 +1,4 @@
-package org.example.barber;
+package org.example.barber.entities;
 
 import java.time.LocalDateTime;
 

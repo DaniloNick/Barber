@@ -4,10 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.barber.DAO.ClienteDAO;
+import org.example.barber.DAO.ServicoDAO;
+import org.example.barber.database.BancoInicializador;
+import org.example.barber.database.ConexaoSQLite;
+import org.example.barber.DAO.ServicoRealizadoDAO;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class Application extends javafx.application.Application {
 
@@ -15,15 +18,17 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        primaryStage = stage;
-
         BancoInicializador.inicializar();
+        ClienteDAO.criarTabela();
+        ServicoDAO.criarTabela();
+        ConexaoSQLite.criarTabelaUsuarios();
+        primaryStage = stage;
         trocarTela("login.fxml", "Barber Shop - Login");
         stage.show();
 
     }public static void trocarTela(String fxml, String titulo) {
         try {
-            FXMLLoader loader = new FXMLLoader(Application.class.getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(Application.class.getResource("views/" + fxml));
             Parent root = loader.load();
             primaryStage.setTitle(titulo);
             primaryStage.setScene(new Scene(root, 854, 500));
