@@ -1,0 +1,171 @@
+/* ======================
+   Paleta escura + detalhes dourados
+====================== */
+
+/* BOTÕES */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #3C3C3C, #2A2A2A);
+    -fx-text-fill: #D4AF37;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #D4AF37;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4D4D4D, #3C3C3C);
+}
+
+.button:pressed {
+    -fx-background-color: #1F1F1F;
+}
+
+/* TEXTFIELDS */
+.text-field {
+    -fx-background-color: #2A2A2A;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 4 8;
+}
+
+.text-field:focused {
+    -fx-border-color: #FFD700; /* tom mais claro no foco */
+}
+
+/* LABELS */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #E0E0E0;
+    -fx-font-weight: bold;
+}
+
+/* TÍTULOS */
+.title-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #D4AF37;
+    -fx-font-weight: bold;
+}
+
+/* SEPARADOR */
+.separator *.line {
+    -fx-background-color: #D4AF37;
+}
+
+/* ======================
+   COMBOBOX (editável e lista)
+====================== */
+.combo-box {
+    -fx-background-color: #2A2A2A;
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #D4AF37;
+}
+
+.combo-box .text-field {
+    -fx-text-fill: #D4AF37;        /* texto dourado */
+    -fx-background-color: #222;    /* fundo escuro */
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.combo-box .text-field:focused {
+    -fx-background-color: #222;
+    -fx-border-color: #FFD700;
+}
+
+/* Dropdown da lista */
+.combo-box-popup .list-view {
+    -fx-background-color: #222;
+}
+
+/* Itens da lista do ComboBox */
+.combo-box-popup .list-cell {
+    -fx-text-fill: #D4AF37;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #D4AF37;
+    -fx-text-fill: #000000;
+}
+
+/* ======================
+   LISTVIEW (normal e sugestão)
+====================== */
+.list-view {
+    -fx-background-color: #1E1E1E;
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cell-size: 28px;
+}
+
+/* Todas as células */
+.list-cell {
+    -fx-text-fill: #D4AF37;
+    -fx-background-color: transparent;
+}
+
+/* Item selecionado */
+.list-cell:selected {
+    -fx-background-color: #D4AF37;
+    -fx-text-fill: #000000;
+}
+
+/* ======================
+   TABLEVIEW
+====================== */
+.table-view {
+    -fx-background-color: #1E1E1E;
+    -fx-control-inner-background: #1E1E1E;
+    -fx-table-cell-border-color: #333333;
+    -fx-padding: 5;
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* Cabeçalho */
+.table-view .column-header-background {
+    -fx-background-color: #2A2A2A;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: #2A2A2A;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+/* Linhas */
+.table-row-cell {
+    -fx-background-color: #1E1E1E;
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #252525;  /* alterna linhas */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #D4AF37; /* seleção em dourado */
+    -fx-text-fill: #000000;
+}
+
+/* ======================
+   ROOT CONTAINER
+====================== */
+.root {
+    -fx-background-color: #000000;
+}
