@@ -4,10 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.LoginController">
+<AnchorPane prefHeight="480" prefWidth="854" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.LoginController">
    <children>
       <TextField fx:id="username" layoutX="302.0" layoutY="202.0" prefHeight="30.0" prefWidth="250.0" />
       <PasswordField fx:id="password" layoutX="302.0" layoutY="263.0" prefHeight="30.0" prefWidth="250.0" />
@@ -19,5 +21,10 @@
          <font>
             <Font size="24.0" />
          </font></Label>
+      <ImageView fitHeight="178.0" fitWidth="174.0" layoutX="56.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/Logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

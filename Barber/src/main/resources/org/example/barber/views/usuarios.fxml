@@ -8,11 +8,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.UsuariosController">
+<AnchorPane prefHeight="500.0" prefWidth="854.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.UsuariosController">
     <children>
         <Label layoutX="334.0" layoutY="39.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gerenciar Usuários" />
 
-        <TableView fx:id="tabelaUsuarios" layoutX="427.0" layoutY="116.0" prefHeight="233.0" prefWidth="360">
+        <TableView fx:id="tabelaUsuarios" layoutX="427.0" layoutY="116.0" prefHeight="233.0" prefWidth="360" stylesheets="@../../../../styles/style.css">
             <columns>
                 <TableColumn fx:id="colNome" prefWidth="180" text="Usuário" />
             </columns>
@@ -24,10 +24,10 @@
         <PasswordField fx:id="confirmarSenha" layoutX="126.0" layoutY="278.0" prefHeight="34.0" prefWidth="181.0" promptText="Confirmar senha" />
 
 
-        <Button layoutX="158.0" layoutY="357.0" onAction="#cadastrarUsuario" prefHeight="34.0" prefWidth="118.0" text="Cadastrar" />
-        <Button layoutX="427.0" layoutY="357.0" onAction="#excluirUsuario" prefHeight="34.0" prefWidth="118.0" text="Excluir Selecionado" />
+        <Button layoutX="126.0" layoutY="340.0" onAction="#cadastrarUsuario" prefHeight="34.0" prefWidth="181.0" text="Cadastrar" />
+        <Button layoutX="427.0" layoutY="357.0" onAction="#excluirUsuario" prefHeight="34.0" prefWidth="118.0" text="Excluir" />
 
-        <Label fx:id="msgErro" layoutX="239.0" layoutY="418.0" prefHeight="34.0" prefWidth="376.0" style="-fx-text-fill: red;" />
+        <Label fx:id="msgErro" layoutX="262.0" layoutY="418.0" prefHeight="46.0" prefWidth="376.0" style="-fx-text-fill: red;" />
       <Label layoutX="427.0" layoutY="97.0" style="-fx-font-size: 15;" text="Usuários Cadastrados" />
       <Button layoutX="40.0" layoutY="435.0" onAction="#voltarMenu" prefHeight="34.0" prefWidth="118.0" text="Voltar" />
     </children>

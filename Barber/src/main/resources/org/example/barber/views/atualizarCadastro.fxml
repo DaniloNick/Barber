@@ -14,7 +14,7 @@
       <PasswordField fx:id="confirmarSenha" layoutX="292.0" layoutY="297.0" prefHeight="35.0" prefWidth="250" promptText="Confirmar Senha" />
       <Label fx:id="mensagem" layoutX="10.0" layoutY="10.0" style="-fx-text-fill: red;" />
       <Button fx:id="btnAtualizar" layoutX="321.0" layoutY="381.0" prefHeight="41.0" prefWidth="195.0" text="Atualizar" />
-      <Button fx:id="voltarLogin" layoutX="38.0" layoutY="412.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="128.0" text="Voltar" />
+      <Button layoutX="38.0" layoutY="412.0" mnemonicParsing="false" onAction="#voltarLogin" prefHeight="41.0" prefWidth="128.0" text="Voltar" />
       <Label layoutX="292.0" layoutY="122.0" style="-fx-font-size: 15;" text="Novo Usuario" />
       <Label layoutX="292.0" layoutY="202.0" style="-fx-font-size: 15;" text="Nova Senha" />
       <Label layoutX="292.0" layoutY="273.0" style="-fx-font-size: 15;" text="Confirme a Senha" />

@@ -30,8 +30,12 @@ public class Application extends javafx.application.Application {
         try {
             FXMLLoader loader = new FXMLLoader(Application.class.getResource("views/" + fxml));
             Parent root = loader.load();
+            Scene scene = new Scene(root, 854, 500);
+            scene.getStylesheets().add(Application.class.getResource("/styles/style.css").toExternalForm());
+
             primaryStage.setTitle(titulo);
-            primaryStage.setScene(new Scene(root, 854, 500));
+            primaryStage.setScene(scene);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package org.example.barber.DAO;
 
+import org.example.barber.controllers.RelatoriosController;
+import org.example.barber.entities.RelatorioItem;
 import org.example.barber.entities.ServicoRealizado;
 import org.example.barber.entities.Servico;
 import org.example.barber.entities.Cliente;
@@ -7,6 +9,7 @@ import org.example.barber.database.ConexaoSQLite;
 
 import java.sql.*;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -88,4 +91,49 @@ public class ServicoRealizadoDAO {
         }
     }
 
+    public static RelatorioItem gerarRelatorio(String barbeiro, LocalDate dataInicial, LocalDate dataFinal, String periodoNome) {
+        String sql = """
+            SELECT 
+                COUNT(*) AS atendimentos,
+                SUM(s.preco) AS faturamento,
+                SUM(s.preco * s.comissao / 100) AS comissao
+            FROM servicos_realizados sr
+            JOIN servicos s ON sr.servico_id = s.id
+            WHERE sr.data_hora BETWEEN ? AND ?
+        """;
+
+        if (!barbeiro.equals("Todos")) {
+            sql += " AND sr.barbeiro = ?";
+        }
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Converte data para timestamp em milissegundos
+            long inicio = dataInicial.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            long fim = dataFinal.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli() - 1;
+
+            stmt.setLong(1, inicio);
+            stmt.setLong(2, fim);
+
+            if (!barbeiro.equals("Todos")) {
+                stmt.setString(3, barbeiro);
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int atendimentos = rs.getInt("atendimentos");
+                double faturamento = rs.getDouble("faturamento");
+                double comissao = rs.getDouble("comissao");
+
+                return new RelatorioItem(periodoNome, atendimentos, faturamento, comissao);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Caso não encontre dados, retorna zerado
+        return new RelatorioItem(periodoNome, 0, 0.0, 0.0);
+    }
 }

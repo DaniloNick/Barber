@@ -49,7 +49,7 @@ public class MenuController implements Initializable {
 
     @FXML
     protected void relatorios() {
-        avisoMenu.setText("Em Breve!");
+        Application.trocarTela("relatorios.fxml","Barber Shop - Relatorios");
     }
 
     @FXML

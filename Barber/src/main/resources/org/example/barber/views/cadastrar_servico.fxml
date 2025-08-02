@@ -8,27 +8,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.CadastrarServicoController">
+<AnchorPane prefHeight="500.0" prefWidth="854.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.CadastrarServicoController">
     <children>
 
         <Label layoutX="311.0" layoutY="32.0" prefHeight="33.0" prefWidth="239.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gerenciamento de Serviços" />
 
-        <Label layoutX="115.0" layoutY="117.0" prefHeight="27.0" prefWidth="94.0" text="Nome do Serviço:" />
-        <TextField fx:id="nomeServicoField" layoutX="227.0" layoutY="121.0" prefHeight="27.0" prefWidth="200" />
+        <Label layoutX="81.0" layoutY="121.0" prefHeight="27.0" prefWidth="94.0" text="Serviço:" />
+        <TextField fx:id="nomeServicoField" layoutX="193.0" layoutY="125.0" prefHeight="27.0" prefWidth="200" />
 
-        <Label layoutX="115.0" layoutY="167.0" prefHeight="27.0" prefWidth="57.0" text="Preço (R$):" />
-        <TextField fx:id="precoServicoField" layoutX="227.0" layoutY="163.0" prefHeight="33.0" prefWidth="200" />
+        <Label layoutX="81.0" layoutY="171.0" prefHeight="27.0" prefWidth="84.0" text="Preço (R$):" />
+        <TextField fx:id="precoServicoField" layoutX="193.0" layoutY="167.0" prefHeight="33.0" prefWidth="200" />
 
-        <Label layoutX="115.0" layoutY="212.0" prefHeight="27.0" prefWidth="94.0" text="Comissão (%):" />
-        <TextField fx:id="comissaoField" layoutX="227.0" layoutY="209.0" prefHeight="33.0" prefWidth="200.0" />
+        <Label layoutX="81.0" layoutY="216.0" prefHeight="27.0" prefWidth="94.0" text="Comissão (%):" />
+        <TextField fx:id="comissaoField" layoutX="193.0" layoutY="213.0" prefHeight="33.0" prefWidth="200.0" />
 
-        <Button fx:id="salvarButton" layoutX="227.0" layoutY="267.0" onAction="#salvarServico" prefHeight="33.0" prefWidth="84.0" text="Salvar" />
-        <Button layoutX="337.0" layoutY="267.0" onAction="#removerServico" prefHeight="33.0" prefWidth="94.0" text="Remover" />
+        <Button fx:id="salvarButton" layoutX="193.0" layoutY="271.0" onAction="#salvarServico" prefHeight="33.0" prefWidth="84.0" text="Salvar" />
+        <Button layoutX="303.0" layoutY="271.0" onAction="#removerServico" prefHeight="33.0" prefWidth="94.0" text="Remover" />
         <Button layoutX="34.0" layoutY="438.0" onAction="#voltarMenu" prefHeight="33.0" prefWidth="94.0" text="Voltar" />
 
-        <Label layoutX="511.0" layoutY="78.0" prefHeight="27.0" prefWidth="124.0" text="Serviços Cadastrados:" />
+        <Label layoutX="462.0" layoutY="78.0" prefHeight="27.0" prefWidth="156.0" text="Serviços Cadastrados:" />
 
-        <TableView fx:id="tabelaServicos" layoutX="463.0" layoutY="105.0" prefHeight="349.0" prefWidth="358.0">
+        <TableView fx:id="tabelaServicos" layoutX="462.0" layoutY="105.0" prefHeight="330.0" prefWidth="359.0">
             <columns>
                 <TableColumn fx:id="colNome" prefWidth="169.0" text="Nome" />
                 <TableColumn fx:id="colPreco" prefWidth="86.0" text="Preço (R$)" />
@@ -36,7 +36,7 @@
             </columns>
         </TableView>
 
-        <Label fx:id="avisoGerenServico" alignment="CENTER" layoutX="155.0" layoutY="441.0" prefHeight="27.0" prefWidth="345.0">
+        <Label fx:id="avisoGerenServico" alignment="CENTER" layoutX="235.0" layoutY="441.0" prefHeight="27.0" prefWidth="345.0">
             <font>
                 <Font size="13.0" />
             </font>
