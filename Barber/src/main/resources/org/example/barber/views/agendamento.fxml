@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.AgendamentoController">
-   <children>
-      <Label layoutX="343.0" layoutY="78.0" style="-fx-font-size: 25;" text="Agendamentos" />
-      <Button layoutX="165.0" layoutY="250.0" mnemonicParsing="false" onAction="#agendarButton" prefHeight="59.0" prefWidth="212.0" text="Agendar Cliente" />
-      <Button layoutX="477.0" layoutY="250.0" mnemonicParsing="false" onAction="#clienteAgendadoButton" prefHeight="59.0" prefWidth="212.0" text="Clientes Agendados" />
-      <Button layoutX="41.0" layoutY="433.0" mnemonicParsing="false" onAction="#voltar" prefHeight="36.0" prefWidth="129.0" text="Voltar" />
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="500.0" prefWidth="854.0"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.barber.controllers.AgendamentoController">
+
+   <!-- Título centralizado no topo -->
+   <top>
+      <Label text="Agendamentos"
+             style="-fx-font-size: 25px; -fx-font-weight: bold;"
+             BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="30" bottom="20"/>
+         </padding>
+      </Label>
+   </top>
+
+   <!-- Botões centrais lado a lado -->
+   <center>
+      <HBox alignment="CENTER" spacing="40">
+         <padding>
+            <Insets top="50" bottom="50" left="20" right="20"/>
+         </padding>
+         <Button text="Agendar Cliente" prefWidth="200" prefHeight="60" onAction="#agendarButton"/>
+         <Button text="Clientes Agendados" prefWidth="200" prefHeight="60" onAction="#clienteAgendadoButton"/>
+      </HBox>
+   </center>
+
+   <!-- Botão voltar no canto inferior esquerdo -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT">
+         <padding>
+            <Insets top="10" bottom="10" left="20" right="20"/>
+         </padding>
+         <Button text="Voltar" prefWidth="130" prefHeight="36" onAction="#voltar"/>
+      </HBox>
+   </bottom>
+
+</BorderPane>

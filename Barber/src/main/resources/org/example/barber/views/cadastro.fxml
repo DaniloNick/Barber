@@ -4,36 +4,59 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480" prefWidth="854" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.CadastroController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.CadastroController">
 
-    <children>
-          <Label layoutX="295.0" layoutY="51.0" prefHeight="58.0" prefWidth="265.0" style="-fx-font-size: 25px; -fx-font-weight: bold;" text="Cadastro de Cliente" />
-        <VBox layoutX="277.0" layoutY="109.0" spacing="15">
-            <children>
-
-                <TextField fx:id="nomeField" prefHeight="30.0" prefWidth="300" promptText="Nome completo" />
-                <TextField fx:id="telefoneField" prefHeight="30.0" prefWidth="300" promptText="Telefone" />
-                <TextField fx:id="dataNascimentoField" prefHeight="30.0" promptText="DD/MM/AAAA" />
-
-                <Button onAction="#salvarCliente" prefHeight="40.0" prefWidth="300" text="Salvar">
-               <VBox.margin>
-                  <Insets top="17.0" />
-               </VBox.margin></Button>
-                <Button onAction="#voltarMenu" prefHeight="40.0" prefWidth="300" text="Voltar ao Menu" />
-                <Label fx:id="mensagemLabel" textFill="red" />
-            </children>
+    <!-- Topo: título -->
+    <top>
+        <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Cadastro de Cliente" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="20" left="0" right="0" top="20" />
+                <Insets bottom="20" top="30" />
             </padding>
+        </Label>
+    </top>
+
+    <!-- Centro: formulário -->
+    <center>
+        <VBox alignment="CENTER" spacing="15">
+            <padding>
+                <Insets bottom="10" left="20" right="20" top="10" />
+            </padding>
+
+            <TextField fx:id="nomeField" maxWidth="350.0" prefHeight="35" prefWidth="400" promptText="Nome completo">
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin></TextField>
+            <TextField fx:id="telefoneField" maxWidth="350.0" prefHeight="35" prefWidth="400" promptText="Telefone" />
+            <TextField fx:id="dataNascimentoField" maxWidth="350.0" prefHeight="35" prefWidth="400" promptText="Data de Nascimento (DD/MM/AAAA)">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></TextField>
+
+            <Button maxWidth="200.0" onAction="#salvarCliente" prefHeight="40" prefWidth="400" text="Salvar">
+            <VBox.margin>
+               <Insets top="20.0" />
+            </VBox.margin></Button>
+            <Label fx:id="mensagemLabel" textFill="red" />
         </VBox>
-      <Label fx:id="avisoCadastroCliente" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="408.0" prefHeight="40.0" prefWidth="391.0">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-    </children>
-</AnchorPane>
+    </center>
+
+    <!-- Bottom: botão voltar à esquerda + aviso centralizado -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets bottom="10" left="20" right="20" top="10" />
+            </padding>
+
+            <Button onAction="#voltarMenu" prefHeight="35" prefWidth="150" text="Voltar ao Menu" />
+            <Label fx:id="avisoCadastroCliente" style="-fx-font-size: 13px;" />
+        </HBox>
+    </bottom>
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+</BorderPane>

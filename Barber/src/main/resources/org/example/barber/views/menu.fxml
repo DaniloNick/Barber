@@ -1,40 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="480" prefWidth="854" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.MenuController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.MenuController">
 
-    <children>
-          <Button layoutX="182.0" layoutY="123.0" onAction="#abrirServico" prefHeight="50.0" prefWidth="200" text="Novo Atendimento" />
-          <Button layoutX="182.0" layoutY="197.0" onAction="#abrirCadastro" prefHeight="50.0" prefWidth="200" text="Cadastro de Cliente" />
-          <Button layoutX="182.0" layoutY="270.0" onAction="#abrirAgendamento" prefHeight="50.0" prefWidth="200" text="Agendamentos" />
-          <Button layoutX="433.0" layoutY="123.0" onAction="#abrirConsulta" prefHeight="50.0" prefWidth="200" text="Consulta" />
-        <Button layoutX="433.0" layoutY="197.0" mnemonicParsing="false" onAction="#relatorios" prefHeight="50.0" prefWidth="200.0" text="Relatorios" />
-        <Button layoutX="433.0" layoutY="270.0" mnemonicParsing="false" onAction="#genrenciarServico" prefHeight="50.0" prefWidth="200.0" text="Gerenciar Serviços" />
-        <Button layoutX="182.0" layoutY="338.0" mnemonicParsing="false" onAction="#gerenciarUsuarios" prefHeight="50.0" prefWidth="200.0" text="Gerenciar Usuarios" />
-          <Button fx:id="btnSair" layoutX="43.0" layoutY="410.0" onAction="#voltarLogin" prefHeight="37.0" prefWidth="119.0" text="Sair" />
+    <!-- Topo: Nome do usuário -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets bottom="20" left="40" right="40" top="20" />
+            </padding>
+            <Label fx:id="userNameMenu" style="-fx-font-size: 25;" text="Nome do Usuario">
+            <HBox.margin>
+               <Insets top="60.0" />
+            </HBox.margin></Label>
+        </HBox>
+    </top>
 
+    <!-- Centro: botões organizados em duas colunas -->
+    <center>
+        <HBox alignment="CENTER" spacing="80">
+            <VBox alignment="CENTER" spacing="20">
+                <Button onAction="#abrirServico" prefHeight="50" prefWidth="200" text="Novo Atendimento" />
+                <Button onAction="#abrirCadastro" prefHeight="50" prefWidth="200" text="Cadastro de Cliente">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Button>
+                <Button onAction="#abrirAgendamento" prefHeight="50" prefWidth="200" text="Agendamentos" />
+                <Button onAction="#gerenciarUsuarios" prefHeight="50" prefWidth="200" text="Gerenciar Usuarios" />
+            <HBox.margin>
+               <Insets left="50.0" />
+            </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" spacing="20">
+                <Button onAction="#abrirConsulta" prefHeight="50" prefWidth="200" text="Consulta" />
+                <Button onAction="#relatorios" prefHeight="50" prefWidth="200" text="Relatorios" />
+                <Button onAction="#genrenciarServico" prefHeight="50" prefWidth="200" text="Gerenciar Serviços" />
+            </VBox>
+            <!-- Logo ao lado direito -->
+            <ImageView fitHeight="271.0" fitWidth="303.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../../../images/Logo.jpg" />
+                </image>
+            <HBox.margin>
+               <Insets bottom="30.0" left="50.0" />
+            </HBox.margin>
+            </ImageView>
+        </HBox>
+    </center>
 
-      <Label fx:id="avisoMenu" alignment="CENTER" layoutX="263.0" layoutY="410.0" prefHeight="37.0" prefWidth="326.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="userNameMenu" layoutX="37.0" layoutY="42.0" prefHeight="50.0" prefWidth="278.0" style="-fx-font-size: 25;" text="Nome do Usuario">
-         <font>
-            <Font size="52.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="162.0" fitWidth="163.0" layoutX="659.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/Logo.jpg" />
-         </image>
-      </ImageView>
-      
-    </children>
-</AnchorPane>
+    <!-- Rodapé: aviso e botão sair -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets bottom="20" left="40" right="40" top="20" />
+            </padding>
+            <Button fx:id="btnSair" onAction="#voltarLogin" prefHeight="37" prefWidth="120" text="Sair" />
+            <Label fx:id="avisoMenu" prefHeight="37.0" textAlignment="CENTER">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+        </HBox>
+    </bottom>
+
+    <!-- Padding geral da tela -->
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+</BorderPane>

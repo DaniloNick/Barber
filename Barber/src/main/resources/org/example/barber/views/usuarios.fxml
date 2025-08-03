@@ -1,34 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="854.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.UsuariosController">
-    <children>
-        <Label layoutX="334.0" layoutY="39.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gerenciar Usuários" />
+<BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.UsuariosController">
 
-        <TableView fx:id="tabelaUsuarios" layoutX="427.0" layoutY="116.0" prefHeight="233.0" prefWidth="360" stylesheets="@../../../../styles/style.css">
-            <columns>
-                <TableColumn fx:id="colNome" prefWidth="180" text="Usuário" />
-            </columns>
-        </TableView>
+    <!-- Topo: título -->
+    <top>
+        <HBox alignment="CENTER">
+            <padding>
+                <Insets bottom="15" top="15" />
+            </padding>
+            <children>
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gerenciar Usuários">
+               <HBox.margin>
+                  <Insets bottom="100.0" top="10.0" />
+               </HBox.margin></Label>
+            </children>
+        </HBox>
+    </top>
 
-        <Label layoutX="126.0" layoutY="129.0" style="-fx-font-size: 15;" text="Novo Usuário" />
-        <TextField fx:id="novoUsuario" layoutX="126.0" layoutY="175.0" prefHeight="34.0" prefWidth="181.0" promptText="Nome do usuário" />
-        <PasswordField fx:id="novaSenha" layoutX="126.0" layoutY="231.0" prefHeight="34.0" prefWidth="181.0" promptText="Senha" />
-        <PasswordField fx:id="confirmarSenha" layoutX="126.0" layoutY="278.0" prefHeight="34.0" prefWidth="181.0" promptText="Confirmar senha" />
+    <!-- Centro -->
+    <center>
+        <HBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets bottom="10" left="20" right="20" top="10" />
+            </padding>
+            <children>
+                <!-- Formulário -->
+                <VBox spacing="10">
+                    <children>
+                        <Label style="-fx-font-size: 15;" text="Novo Usuário">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Label>
+                        <TextField fx:id="novoUsuario" prefWidth="180" promptText="Nome do usuário">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></TextField>
+                        <PasswordField fx:id="novaSenha" prefWidth="180" promptText="Senha">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></PasswordField>
+                        <PasswordField fx:id="confirmarSenha" prefWidth="180" promptText="Confirmar senha">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin></PasswordField>
+                        <Button onAction="#cadastrarUsuario" prefWidth="180" text="Cadastrar" />
+                    </children>
+                </VBox>
 
+                <!-- Tabela -->
+                <VBox spacing="5">
+                    <children>
+                        <Label style="-fx-font-size: 15;" text="Usuários Cadastrados" />
+                        <TableView fx:id="tabelaUsuarios" prefHeight="233" prefWidth="360">
+                            <columns>
+                                <TableColumn fx:id="colNome" prefWidth="180" text="Usuário" />
+                            </columns>
+                        </TableView>
+                        <Button onAction="#excluirUsuario" prefWidth="118" text="Excluir" />
+                    </children>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+                </VBox>
+            </children>
+        </HBox>
+    </center>
 
-        <Button layoutX="126.0" layoutY="340.0" onAction="#cadastrarUsuario" prefHeight="34.0" prefWidth="181.0" text="Cadastrar" />
-        <Button layoutX="427.0" layoutY="357.0" onAction="#excluirUsuario" prefHeight="34.0" prefWidth="118.0" text="Excluir" />
+    <!-- Rodapé -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets bottom="10" left="20" top="10" />
+            </padding>
+            <children>
+                <Button onAction="#voltarMenu" prefWidth="118" text="Voltar" />
+                <Label fx:id="msgErro" prefHeight="46.0" prefWidth="376.0" style="-fx-text-fill: red;" />
+            </children>
+        </HBox>
+    </bottom>
 
-        <Label fx:id="msgErro" layoutX="262.0" layoutY="418.0" prefHeight="46.0" prefWidth="376.0" style="-fx-text-fill: red;" />
-      <Label layoutX="427.0" layoutY="97.0" style="-fx-font-size: 15;" text="Usuários Cadastrados" />
-      <Button layoutX="40.0" layoutY="435.0" onAction="#voltarMenu" prefHeight="34.0" prefWidth="118.0" text="Voltar" />
-    </children>
-</AnchorPane>
+</BorderPane>

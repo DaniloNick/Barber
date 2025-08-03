@@ -30,7 +30,7 @@ public class Application extends javafx.application.Application {
         try {
             FXMLLoader loader = new FXMLLoader(Application.class.getResource("views/" + fxml));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 854, 500);
+            Scene scene = new Scene(root, 1280, 720);
             scene.getStylesheets().add(Application.class.getResource("/styles/style.css").toExternalForm());
 
             primaryStage.setTitle(titulo);
