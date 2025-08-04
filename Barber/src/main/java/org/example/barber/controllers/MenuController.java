@@ -169,6 +169,23 @@ public class MenuController implements Initializable {
                 alert.setTitle("Senha incorreta");
                 alert.setHeaderText(null);
                 alert.setContentText("Senha incorreta. Acesso negado.");
+
+                // Aplica o CSS
+                alert.getDialogPane().getStylesheets().add(
+                        getClass().getResource("/styles/style.css").toExternalForm()
+                );
+                // ✅ Impede mover (tira barra de título)
+                alert.setOnShowing(e -> {
+                    Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                    stage.initStyle(StageStyle.UNDECORATED);
+                });
+
+                // ✅ Garante centralizar ao abrir
+                alert.setOnShown(e -> {
+                    Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                    stage.centerOnScreen();
+                });
+
                 alert.showAndWait();
             }
         } else {
