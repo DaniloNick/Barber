@@ -3,16 +3,13 @@ package org.example.barber.DAO;
 import org.example.barber.database.ConexaoSQLite;
 import org.example.barber.entities.Usuario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
 
-    // Retorna o usuário completo se login válido, ou null caso contrário
+    // Valida login (retorna usuario se correto, senão null)
     public static Usuario validarLogin(String nome, String senha) {
         String sql = "SELECT * FROM usuarios WHERE nome = ? AND senha = ?";
 
@@ -25,19 +22,22 @@ public class UsuarioDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                int id = rs.getInt("id");
-                boolean isAdmin = rs.getBoolean("isAdmin");
-                return new Usuario(id, nome, senha, isAdmin);
+                return new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getBoolean("isAdmin")
+                );
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null; // login inválido ou erro
+        return null;
     }
 
-    // Verifica se um usuário já existe
+    // Verifica se usuário já existe
     public static boolean usuarioExiste(String nome) {
         String sql = "SELECT 1 FROM usuarios WHERE nome = ? LIMIT 1";
 
@@ -55,7 +55,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Insere um novo usuário
+    // Insere novo usuario
     public static void inserir(String nome, String senha, boolean isAdmin) {
         String sql = "INSERT INTO usuarios(nome, senha, isAdmin) VALUES(?, ?, ?)";
 
@@ -65,6 +65,7 @@ public class UsuarioDAO {
             stmt.setString(1, nome);
             stmt.setString(2, senha);
             stmt.setBoolean(3, isAdmin);
+
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -72,7 +73,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Atualiza usuário incluindo isAdmin
+    // Atualiza dados do usuario pelo nome
     public static boolean atualizarUsuario(String nomeAtual, String novoNome, String novaSenha, boolean isAdmin) {
         String sql = "UPDATE usuarios SET nome = ?, senha = ?, isAdmin = ? WHERE nome = ?";
 
@@ -92,7 +93,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Método opcional para checar se usuário é admin, caso precise
+    // Retorna true se for admin
     public static boolean isUsuarioAdmin(String nome) {
         String sql = "SELECT isAdmin FROM usuarios WHERE nome = ?";
 
@@ -113,24 +114,8 @@ public class UsuarioDAO {
         return false;
     }
 
-    // Verifica se há ao menos um usuário no banco
-    public static boolean tabelaUsuariosExistente() {
-        String sql = "SELECT 1 FROM usuarios LIMIT 1";
-
-        try (Connection conn = ConexaoSQLite.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = stmt.executeQuery();
-
-            return rs.next();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public List<Usuario> listarTodos() {
+    // Retorna todos os usuarios
+    public static List<Usuario> listarTodos() {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
 
@@ -139,12 +124,12 @@ public class UsuarioDAO {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String senha = rs.getString("senha");
-                boolean isAdmin = rs.getBoolean("isAdmin");
-
-                usuarios.add(new Usuario(id, nome, senha, isAdmin));
+                usuarios.add(new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getBoolean("isAdmin")
+                ));
             }
 
         } catch (SQLException e) {
@@ -154,7 +139,8 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public Usuario buscarPorNome(String nome) {
+    // Buscar por nome
+    public static Usuario buscarPorNome(String nome) {
         String sql = "SELECT * FROM usuarios WHERE nome = ?";
 
         try (Connection conn = ConexaoSQLite.conectar();
@@ -164,11 +150,12 @@ public class UsuarioDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                int id = rs.getInt("id");
-                String senha = rs.getString("senha");
-                boolean isAdmin = rs.getBoolean("isAdmin");
-
-                return new Usuario(id, nome, senha, isAdmin);
+                return new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getBoolean("isAdmin")
+                );
             }
 
         } catch (SQLException e) {
@@ -178,28 +165,88 @@ public class UsuarioDAO {
         return null;
     }
 
-    public boolean excluir(int id) {
-        String verificarAdminSQL = "SELECT isAdmin FROM usuarios WHERE id = ?";
-        String excluirSQL = "DELETE FROM usuarios WHERE id = ?";
+    // Validar senha de um usuário específico
+    public static boolean validarSenha(String nome, String senhaDigitada) {
+        String sql = "SELECT 1 FROM usuarios WHERE nome = ? AND senha = ?";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            stmt.setString(2, senhaDigitada);
+
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Listar barbeiros (quem não é admin)
+    public static List<Usuario> listarBarbeiros() {
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getBoolean("isAdmin")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    // Excluir usuario por id (não pode excluir admin)
+    public static boolean excluir(int id) {
+        String sqlCheck = "SELECT isAdmin FROM usuarios WHERE id = ?";
+        String sqlDelete = "DELETE FROM usuarios WHERE id = ?";
 
         try (Connection conn = ConexaoSQLite.conectar()) {
-            // Verifica se o usuário é admin
-            try (PreparedStatement verificarStmt = conn.prepareStatement(verificarAdminSQL)) {
-                verificarStmt.setInt(1, id);
-                ResultSet rs = verificarStmt.executeQuery();
+            try (PreparedStatement checkStmt = conn.prepareStatement(sqlCheck)) {
+                checkStmt.setInt(1, id);
+                ResultSet rs = checkStmt.executeQuery();
 
                 if (rs.next() && rs.getBoolean("isAdmin")) {
-                    // É administrador: não pode excluir
-                    System.out.println("Impossível excluir Administrador.");
+                    System.out.println("Impossível excluir administrador.");
                     return false;
                 }
             }
 
-            // Não é admin: pode excluir
-            try (PreparedStatement excluirStmt = conn.prepareStatement(excluirSQL)) {
-                excluirStmt.setInt(1, id);
-                return excluirStmt.executeUpdate() > 0;
+            try (PreparedStatement delStmt = conn.prepareStatement(sqlDelete)) {
+                delStmt.setInt(1, id);
+                return delStmt.executeUpdate() > 0;
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean atualizar(Usuario usuario) {
+        String sql = "UPDATE usuarios SET nome = ?, senha = ?, isAdmin = ? WHERE id = ?";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getSenha());
+            stmt.setBoolean(3, usuario.isAdmin());
+            stmt.setInt(4, usuario.getId());
+
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,4 +256,19 @@ public class UsuarioDAO {
 
 
 
+    // Método para verificar se há pelo menos um usuário cadastrado (para inicializar admin)
+    public static boolean tabelaUsuariosExistente() {
+        String sql = "SELECT 1 FROM usuarios LIMIT 1";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            return rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -17,7 +17,7 @@ public class ClienteDAO {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
                 telefone TEXT,
-                dataNascimento TEXT
+                data_nascimento TEXT
             )
         """;
 
@@ -94,7 +94,6 @@ public class ClienteDAO {
                         rs.getString("nome"),
                         rs.getString("telefone"),
                         LocalDate.parse(rs.getString("data_nascimento"))
-
                 );
                 clientes.add(cliente);
             }
@@ -106,8 +105,6 @@ public class ClienteDAO {
         return clientes;
     }
 
-
-    // Método para buscar cliente por ID
     public static Cliente buscarPorId(int id) {
         String sql = "SELECT * FROM clientes WHERE id = ?";
 
@@ -120,10 +117,9 @@ public class ClienteDAO {
                 int clienteId = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String telefone = rs.getString("telefone");
-                Date dataNascimento = rs.getDate("data_nascimento");
+                LocalDate dataNascimento = LocalDate.parse(rs.getString("data_nascimento"));
 
-                // Retorna o objeto Cliente com os dados do banco
-                return new Cliente(clienteId, nome, telefone, dataNascimento.toLocalDate());
+                return new Cliente(clienteId, nome, telefone, dataNascimento);
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar cliente por ID:");
@@ -133,8 +129,46 @@ public class ClienteDAO {
         return null;
     }
 
+    public static boolean atualizar(Cliente cliente) {
+        String sql = "UPDATE clientes SET nome = ?, telefone = ?, data_nascimento = ? WHERE id = ?";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getTelefone());
+            stmt.setString(3, cliente.getDataNascimento().toString());
+            stmt.setInt(4, cliente.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar cliente:");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean excluir(Cliente cliente) {
+        String sql = "DELETE FROM clientes WHERE id = ?";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, cliente.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir cliente:");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static List<ServicoRealizado> buscarServicosRealizados(int clienteId) {
         return ServicoRealizadoDAO.listarPorCliente(clienteId);
     }
-
 }

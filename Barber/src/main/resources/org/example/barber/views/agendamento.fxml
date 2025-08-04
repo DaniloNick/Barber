@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="500.0" prefWidth="854.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.barber.controllers.AgendamentoController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.AgendamentoController">
 
    <!-- Título centralizado no topo -->
    <top>
-      <Label text="Agendamentos"
-             style="-fx-font-size: 25px; -fx-font-weight: bold;"
-             BorderPane.alignment="CENTER">
+      <Label style="-fx-font-size: 25px; -fx-font-weight: bold;" text="Agendamentos" BorderPane.alignment="CENTER">
          <padding>
-            <Insets top="30" bottom="20"/>
+            <Insets bottom="20" top="30" />
          </padding>
       </Label>
    </top>
@@ -28,10 +23,16 @@
    <center>
       <HBox alignment="CENTER" spacing="40">
          <padding>
-            <Insets top="50" bottom="50" left="20" right="20"/>
+            <Insets bottom="50" left="20" right="20" top="50" />
          </padding>
-         <Button text="Agendar Cliente" prefWidth="200" prefHeight="60" onAction="#agendarButton"/>
-         <Button text="Clientes Agendados" prefWidth="200" prefHeight="60" onAction="#clienteAgendadoButton"/>
+         <Button onAction="#agendarButton" prefHeight="60" prefWidth="200" text="Agendar Cliente" />
+         <Button onAction="#clienteAgendadoButton" prefHeight="60" prefWidth="200" text="Clientes Agendados">
+            <HBox.margin>
+               <Insets right="-200.0" />
+            </HBox.margin></Button>
+         <BorderPane.margin>
+            <Insets left="70.0" />
+         </BorderPane.margin>
       </HBox>
    </center>
 
@@ -39,10 +40,26 @@
    <bottom>
       <HBox alignment="CENTER_LEFT">
          <padding>
-            <Insets top="10" bottom="10" left="20" right="20"/>
+            <Insets bottom="10" left="20" right="20" top="10" />
          </padding>
-         <Button text="Voltar" prefWidth="130" prefHeight="36" onAction="#voltar"/>
+         <Button onAction="#voltar" prefHeight="36" prefWidth="130" text="Voltar">
+            <HBox.margin>
+               <Insets bottom="20.0" left="20.0" />
+            </HBox.margin></Button>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </HBox>
    </bottom>
+   <right>
+      <ImageView fitHeight="271.0" fitWidth="303.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../../images/Logo.jpg" />
+         </image>
+         <BorderPane.margin>
+            <Insets right="100.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </right>
 
 </BorderPane>

@@ -23,6 +23,12 @@
 .button:pressed {
     -fx-background-color: #1F1F1F;
 }
+.button:focused {
+    -fx-border-color: #FFD700;            /* contorno mais claro ao focar */
+    -fx-border-width: 2;                  /* destaca mais */
+    -fx-background-color: linear-gradient(to bottom, #5E5E5E, #4D4D4D); /* levemente mais claro */
+}
+
 
 /* TEXTFIELDS */
 .text-field {
@@ -36,11 +42,13 @@
 
 .text-field:focused {
     -fx-border-color: #FFD700; /* tom mais claro no foco */
+    -fx-border-width: 2;                  /* destaca mais */
+    -fx-background-color: linear-gradient(to bottom, #5E5E5E, #4D4D4D); /* levemente mais claro */
 }
 
 /* LABELS */
 .label {
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-text-fill: #E0E0E0;
     -fx-font-weight: bold;
 }
@@ -79,6 +87,9 @@
 .combo-box .text-field:focused {
     -fx-background-color: #222;
     -fx-border-color: #FFD700;
+    -fx-border-width: 2;                  /* destaca mais */
+    -fx-background-color: linear-gradient(to bottom, #5E5E5E, #4D4D4D); /* levemente mais claro */
+
 }
 
 /* Dropdown da lista */
@@ -151,7 +162,7 @@
 /* Linhas */
 .table-row-cell {
     -fx-background-color: #1E1E1E;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #D4AF37;
 }
 
 .table-row-cell:odd {
@@ -170,3 +181,25 @@
     -fx-background-color: #000000;
 
 }
+
+/* Caixa de Dialogo */
+.dialog-pane {
+    -fx-background-color: #1E1E1E; /* ex: fundo escuro */
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+.dialog-pane .header-panel {
+    -fx-background-color: #000000; /* fundo preto */
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: #D4AF37; /* texto branco */
+    -fx-font-weight: bold;
+}
+
+.dialog-pane .button {
+    /* mantém seu estilo atual para botões dentro do diálogo */
+}
+

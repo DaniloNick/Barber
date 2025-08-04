@@ -123,6 +123,6 @@ public class CadastrarServicoController {
 
     @FXML
     private void voltarMenu() {
-        Application.trocarTela("menu.fxml", "Barber Shop - Menu Principal");
+        Application.trocarTela("menuAdmin.fxml","Barber Shop - Menu Administrativo");
     }
 }

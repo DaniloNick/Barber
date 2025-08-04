@@ -43,7 +43,7 @@
                                 <Label text="Serviço:" />
                                 <TextField fx:id="nomeServicoField" prefWidth="200">
                            <HBox.margin>
-                              <Insets left="40.0" />
+                              <Insets left="45.0" />
                            </HBox.margin></TextField>
                             </children>
                      <VBox.margin>
@@ -56,7 +56,7 @@
                                 <Label text="Preço (R$):" />
                                 <TextField fx:id="precoServicoField" prefWidth="200">
                            <HBox.margin>
-                              <Insets left="20.0" />
+                              <Insets left="22.0" />
                            </HBox.margin></TextField>
                             </children>
                      <VBox.margin>
@@ -76,11 +76,14 @@
 
                         <HBox spacing="10">
                             <children>
-                                <Button fx:id="salvarButton" onAction="#salvarServico" prefWidth="84" text="Salvar" />
+                                <Button fx:id="salvarButton" onAction="#salvarServico" prefWidth="84" text="Salvar">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></Button>
                                 <Button onAction="#removerServico" prefWidth="94" text="Remover" />
                             </children>
                      <VBox.margin>
-                        <Insets left="100.0" top="10.0" />
+                        <Insets left="112.0" top="20.0" />
                      </VBox.margin>
                         </HBox>
                     </children>
@@ -90,11 +93,11 @@
                 <VBox spacing="5">
                     <children>
                         <Label text="Serviços Cadastrados:" />
-                        <TableView fx:id="tabelaServicos" prefHeight="330.0" prefWidth="359.0">
+                        <TableView fx:id="tabelaServicos" prefHeight="400.0" prefWidth="500.0">
                             <columns>
-                                <TableColumn fx:id="colNome" prefWidth="150.0" text="Nome" />
-                                <TableColumn fx:id="colPreco" prefWidth="90.0" text="Preço (R$)" />
-                                <TableColumn fx:id="colComissaoReais" prefWidth="110.0" text="Comissão (R$)" />
+                                <TableColumn fx:id="colNome" editable="false" prefWidth="220.0" text="Nome" />
+                                <TableColumn fx:id="colPreco" editable="false" prefWidth="120.0" text="Preço (R$)" />
+                                <TableColumn fx:id="colComissaoReais" editable="false" prefWidth="144.0" text="Comissão (R$)" />
                             </columns>
                         </TableView>
                     </children>
@@ -110,11 +113,17 @@
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
             <children>
-                <Button onAction="#voltarMenu" prefWidth="94" text="Voltar" />
+                <Button onAction="#voltarMenu" prefWidth="94" text="Voltar">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </HBox.margin></Button>
                 <Label fx:id="avisoGerenServico" alignment="CENTER" prefHeight="27.0" prefWidth="345.0">
                     <font>
                         <Font size="13.0" />
                     </font>
+               <HBox.margin>
+                  <Insets left="350.0" />
+               </HBox.margin>
                 </Label>
             </children>
         </HBox>

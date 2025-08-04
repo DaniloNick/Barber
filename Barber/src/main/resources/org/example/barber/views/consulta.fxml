@@ -20,13 +20,10 @@
                 <Insets bottom="10" left="40" right="40" top="20" />
             </padding>
             <Label style="-fx-font-size: 24; -fx-font-weight: bold;" text="Consulta de Clientes">
-            <VBox.margin>
-               <Insets bottom="30.0" />
-            </VBox.margin></Label>
-            <HBox alignment="CENTER" spacing="10">
-                <Button onAction="#voltarMenu" prefWidth="100" text="Voltar" />
-                <TextField fx:id="nomeClienteField" prefWidth="400" promptText="Buscar por nome" />
-            </HBox>
+                <VBox.margin>
+                    <Insets bottom="30.0" />
+                </VBox.margin>
+            </Label>
         </VBox>
     </top>
 
@@ -39,18 +36,27 @@
 
             <!-- Lado esquerdo: clientes -->
             <VBox alignment="TOP_LEFT" spacing="10">
-                <Label style="-fx-font-size: 16;" text="Clientes" />
-                <ListView fx:id="clientesListView" onMouseClicked="#mostrarHistorico" prefHeight="450" prefWidth="350">
-                    <!-- Se preferir, pode trocar para ListView -->
-                </ListView>
+               <TextField fx:id="nomeClienteField" maxWidth="300.0" prefHeight="27.0" prefWidth="560.0" promptText="Buscar por nome">
+               <VBox.margin>
+                  <Insets top="35.0" />
+               </VBox.margin>
+            </TextField>
+                <Label style="-fx-font-size: 16;" text="Clientes:">
+               <VBox.margin>
+                  <Insets bottom="-10.0" top="5.0" />
+               </VBox.margin></Label>
+                <ListView fx:id="clientesListView" onMouseClicked="#mostrarHistorico" prefHeight="450" prefWidth="350" />
             </VBox>
 
             <!-- Lado direito: histórico -->
             <VBox alignment="TOP_LEFT" spacing="10">
-                <Label style="-fx-font-size: 16;" text="Histórico de Serviços:" />
+                <Label style="-fx-font-size: 16;" text="Histórico de Serviços:">
+               <VBox.margin>
+                  <Insets bottom="-10.0" top="10.0" />
+               </VBox.margin></Label>
                 <TableView fx:id="historicoTableView" prefHeight="450" prefWidth="500">
                     <columns>
-                        <TableColumn fx:id="colData" prefWidth="120.0" text="Data" />
+                        <TableColumn fx:id="colData" prefWidth="120.0" text="Data/Hora" />
                         <TableColumn fx:id="colServico" prefWidth="160" text="Serviço" />
                         <TableColumn fx:id="colPreco" prefWidth="80" text="Preço" />
                         <TableColumn fx:id="colBarbeiro" prefWidth="130.0" text="Barbeiro" />
@@ -59,6 +65,16 @@
             </VBox>
         </HBox>
     </center>
+
+    <!-- Rodapé: botão Voltar no canto esquerdo inferior -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets bottom="20" left="40" top="10" />
+            </padding>
+            <Button onAction="#voltarMenu" prefWidth="100" text="Voltar" />
+        </HBox>
+    </bottom>
 
     <!-- Padding geral -->
     <padding>

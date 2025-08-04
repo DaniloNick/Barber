@@ -36,9 +36,6 @@ public class ConsultaController {
         // Inicializa a lista de todos os clientes (a lista completa será filtrada conforme a busca)
         todosClientes = ClienteDAO.listarTodos();
 
-        // Inicializa a ListView como vazia
-        //clientesListView.setItems(FXCollections.observableArrayList());
-
         // Configura listagem de clientes
         clientesListView.setItems(FXCollections.observableArrayList());
         clientesListView.setCellFactory(param -> new ListCell<>() {
@@ -69,7 +66,7 @@ public class ConsultaController {
                 )
         );
         colBarbeiro.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getBarbeiro())
+                new SimpleStringProperty(cellData.getValue().getBarbeiro().getNome())
         );
 
         // Formata a célula para exibir como "R$ 10,00"

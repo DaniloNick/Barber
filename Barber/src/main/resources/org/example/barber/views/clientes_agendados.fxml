@@ -94,6 +94,9 @@
                     </children>
                 </VBox>
             </children>
+         <BorderPane.margin>
+            <Insets top="30.0" />
+         </BorderPane.margin>
         </HBox>
     </center>
 
@@ -104,11 +107,17 @@
                 <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
             </padding>
             <children>
-                <Button onAction="#voltarMenu" prefHeight="37.0" prefWidth="142.0" text="Voltar" />
+                <Button onAction="#voltarMenu" prefHeight="37.0" prefWidth="142.0" text="Voltar">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </HBox.margin></Button>
                 <Label fx:id="avisoClientesAgendados" alignment="CENTER" prefHeight="35.0" prefWidth="443.0">
                     <font>
                         <Font size="13.0" />
                     </font>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="250.0" />
+               </HBox.margin>
                 </Label>
             </children>
         </HBox>

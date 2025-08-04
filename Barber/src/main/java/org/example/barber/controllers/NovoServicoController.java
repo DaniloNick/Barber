@@ -1,17 +1,20 @@
 package org.example.barber.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.example.barber.Application;
 import org.example.barber.DAO.ClienteDAO;
 import org.example.barber.DAO.ServicoDAO;
 import org.example.barber.DAO.ServicoRealizadoDAO;
-import org.example.barber.entities.Cliente;
-import org.example.barber.entities.Servico;
-import org.example.barber.entities.ServicoRealizado;
-import org.example.barber.entities.Sessao;
+import org.example.barber.DAO.UsuarioDAO;
+import org.example.barber.entities.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +28,9 @@ public class NovoServicoController {
     @FXML private ListView<Cliente> buscaCliente;
     @FXML private Label totalServicos;
     @FXML private Label avisoServico;
+    @FXML
+    private ComboBox<Usuario> barbeiroComboBox;
+
 
     private Cliente clienteSelecionado;
     private final ObservableList<Servico> servicosSelecionados = FXCollections.observableArrayList();
@@ -34,6 +40,8 @@ public class NovoServicoController {
     private void initialize() {
         // Carregar clientes uma única vez
         todosClientes = ClienteDAO.listarTodos();
+        ObservableList<Usuario> barbeiros = FXCollections.observableArrayList(UsuarioDAO.listarBarbeiros());
+        barbeiroComboBox.setItems(barbeiros);
 
         tipoServicoComboBox.setItems(FXCollections.observableArrayList(ServicoDAO.buscarTodos()));
         listaServicos.setItems(servicosSelecionados);
@@ -122,15 +130,95 @@ public class NovoServicoController {
             return;
         }
 
+        Usuario barbeiroSelecionado = barbeiroComboBox.getSelectionModel().getSelectedItem();
+        if (barbeiroSelecionado == null) {
+            avisoServico.setText("Selecione um barbeiro.");
+            return;
+        }
+
+        // Se o barbeiro escolhido não é o usuário logado → pedir senha do usuário logado
+        if (barbeiroSelecionado.getId() != Sessao.usuarioLogado.getId()) {
+
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Autenticação necessária");
+
+            String nome = Sessao.usuarioLogado.getNome();
+            nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
+            dialog.setHeaderText(nome + ", Voce esta transferindo o servico, Digite sua senha:");
+
+            //Carrega estilo CSS
+            dialog.getDialogPane().getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+
+            ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
+
+            PasswordField passwordField = new PasswordField();
+            passwordField.setPromptText("Senha");
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            grid.add(new Label("Senha:"), 0, 0);
+            grid.add(passwordField, 1, 0);
+
+            dialog.getDialogPane().setContent(grid);
+
+            // Solicitar foco no campo senha
+            Platform.runLater(passwordField::requestFocus);
+
+            // ✅ Impede mover (tira barra de título)
+            dialog.setOnShowing(e -> {
+                Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+                stage.initStyle(StageStyle.UNDECORATED);
+            });
+
+            // ✅ Garante centralizar ao abrir
+            dialog.setOnShown(e -> {
+                Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+                stage.centerOnScreen();
+            });
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == okButtonType) {
+                    return passwordField.getText();
+                }
+                return null;
+            });
+
+            var resultado = dialog.showAndWait();
+
+            if (resultado.isEmpty()) {
+                avisoServico.setText("Atendimento cancelado: autenticação não realizada.");
+                return;
+            }
+
+            String senhaDigitada = resultado.get();
+            boolean senhaCorreta = UsuarioDAO.validarSenha(Sessao.usuarioLogado.getNome(), senhaDigitada);
+            if (!senhaCorreta) {
+                avisoServico.setText("Senha incorreta. Atendimento não registrado.");
+                return;
+            }
+        }
+
+        // Registrar serviços usando o barbeiro selecionado
         for (Servico servico : servicosSelecionados) {
-            Servico servicoSelecionado = ServicoDAO.buscarPorId(servico.getId());
-            ServicoRealizado realizado = new ServicoRealizado(clienteSelecionado, servicoSelecionado, LocalDateTime.now(), Sessao.usuarioLogado);
+            Servico servicoCompleto = ServicoDAO.buscarPorId(servico.getId());
+            ServicoRealizado realizado = new ServicoRealizado(
+                    clienteSelecionado,
+                    servicoCompleto,
+                    LocalDateTime.now(),
+                    barbeiroSelecionado
+            );
             ServicoRealizadoDAO.salvar(realizado);
         }
 
         avisoServico.setText("Atendimento registrado com sucesso!");
         limparCampos();
     }
+
+
 
     private void limparCampos() {
         servicosSelecionados.clear();

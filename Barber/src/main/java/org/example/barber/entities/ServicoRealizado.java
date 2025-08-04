@@ -4,30 +4,39 @@ import java.time.LocalDateTime;
 
 public class ServicoRealizado {
 
+    private int id;
     private Cliente cliente;
     private Servico servico;
     private LocalDateTime dataHora;
-    private String barbeiro;
+    private Usuario barbeiro;
 
     // Construtor ajustado para Cliente, Servico e LocalDateTime
-    public ServicoRealizado(Cliente cliente, Servico servico, LocalDateTime dataHora, String barbeiro) {
+    public ServicoRealizado(Cliente cliente, Servico servico, LocalDateTime dataHora, Usuario barbeiro) {
         this.cliente = cliente;
         this.servico = servico;
         this.dataHora = dataHora;
         this.barbeiro = barbeiro;
     }
 
-    public String getBarbeiro() {
+    public ServicoRealizado() {}
+
+    public int getId() {
+        return id;
+    }
+    public Usuario getBarbeiro() {
         return barbeiro;
     }
 
-    public void setBarbeiro(String barbeiro) {
+    public void setBarbeiro(Usuario barbeiro) {
         this.barbeiro = barbeiro;
     }
 
     // Getters e setters
     public Cliente getCliente() {
         return cliente;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCliente(Cliente cliente) {

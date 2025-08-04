@@ -20,6 +20,10 @@ public class Servico {
         this.comissao = comissao;
     }
 
+    public Servico() {
+
+    }
+
     public int getId() {
         return id;
     }

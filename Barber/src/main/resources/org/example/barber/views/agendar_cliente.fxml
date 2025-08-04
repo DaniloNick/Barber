@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="500.0" prefWidth="854.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.AgendarClienteController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.barber.controllers.AgendarClienteController">
 
     <!-- Título topo -->
     <top>
@@ -49,7 +49,10 @@
                     <Spinner fx:id="horaSpinner" prefWidth="100" />
                 </HBox>
 
-                <Button onAction="#agendarCliente" prefHeight="35" prefWidth="150" text="Agendar" />
+                <Button onAction="#agendarCliente" prefHeight="35" prefWidth="150" text="Agendar">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin></Button>
             <HBox.margin>
                <Insets />
             </HBox.margin>
@@ -58,7 +61,7 @@
             <!-- Lista de clientes -->
             <ListView fx:id="agendarClienteLista" maxHeight="300.0" prefHeight="250.0" prefWidth="250" />
          <BorderPane.margin>
-            <Insets top="20.0" />
+            <Insets top="80.0" />
          </BorderPane.margin>
         </HBox>
     </center>
@@ -69,11 +72,17 @@
             <padding>
                 <Insets bottom="10" left="20" right="20" top="10" />
             </padding>
-            <Button onAction="#voltarMenu" prefHeight="35" prefWidth="100" text="Voltar" />
-            <Label fx:id="avisoAgendarCliente" style="-fx-font-size: 13px;">
+            <Button onAction="#voltarMenu" prefHeight="35" prefWidth="100" text="Voltar">
+            <HBox.margin>
+               <Insets bottom="20.0" left="20.0" />
+            </HBox.margin></Button>
+            <Label fx:id="avisoAgendarCliente">
                 <padding>
                     <Insets left="20" />
                 </padding>
+            <HBox.margin>
+               <Insets left="200.0" />
+            </HBox.margin>
             </Label>
 
         </HBox>

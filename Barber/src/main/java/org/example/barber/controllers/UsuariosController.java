@@ -83,8 +83,53 @@ public class UsuariosController {
     }
 
     @FXML
+    private void atualizarUsuario() {
+        Usuario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+
+        if (selecionado == null) {
+            msgErro.setText("Selecione um usuário para atualizar.");
+            return;
+        }
+
+        String nome = novoUsuario.getText().trim();
+        String senha = novaSenha.getText();
+        String confirmar = confirmarSenha.getText();
+
+        if (nome.isEmpty() || senha.isEmpty() || confirmar.isEmpty()) {
+            msgErro.setText("Preencha todos os campos.");
+            return;
+        }
+
+        if (!senha.equals(confirmar)) {
+            msgErro.setText("As senhas não coincidem.");
+            return;
+        }
+
+        // Se o nome for diferente do nome original, verificar duplicidade
+        if (!nome.equals(selecionado.getNome()) && usuarioDAO.buscarPorNome(nome) != null) {
+            msgErro.setText("Este nome de usuário já está em uso.");
+            return;
+        }
+
+        // Atualiza o objeto usuário
+        selecionado.setNome(nome);
+        selecionado.setSenha(senha);  // Ajuste conforme como você armazena a senha (hash etc)
+
+        boolean atualizado = usuarioDAO.atualizar(selecionado);
+        if (atualizado) {
+            msgErro.setText("Usuário atualizado com sucesso!");
+            limparCampos();
+            carregarUsuarios();
+        } else {
+            msgErro.setText("Erro ao atualizar usuário.");
+        }
+    }
+
+
+
+    @FXML
     private void voltarMenu() {
-        Application.trocarTela("menu.fxml","Barber Shop - Menu Principal");
+        Application.trocarTela("menuAdmin.fxml","Barber Shop - Menu Administrativo");
     }
 
     private void limparCampos() {

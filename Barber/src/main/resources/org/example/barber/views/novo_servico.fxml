@@ -16,9 +16,9 @@
     <!-- Topo: título centralizado -->
     <top>
         <Label style="-fx-font-size: 20; -fx-font-weight: bold;" text="Digite o nome do cliente e escolha o serviço" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="60.0" />
-         </BorderPane.margin></Label>
+            <BorderPane.margin>
+                <Insets top="60.0" />
+            </BorderPane.margin></Label>
     </top>
 
     <!-- Centro: dividido em dois lados -->
@@ -30,41 +30,66 @@
 
             <!-- Lado esquerdo: campos e botões -->
             <VBox alignment="TOP_LEFT" spacing="15">
-                <Label style="-fx-font-size: 16;" text="Nome do Cliente:" />
-                <TextField fx:id="nomeClienteField" prefWidth="250" promptText="Digite o nome do Cliente" />
+                <Label style="-fx-font-size: 16;" text="Nome do Cliente:">
+               <VBox.margin>
+                  <Insets bottom="-15.0" top="15.0" />
+               </VBox.margin></Label>
+                <TextField fx:id="nomeClienteField" prefWidth="250" promptText="Digite o nome do Cliente">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
 
                 <!-- ListView para busca do cliente -->
-                <ListView fx:id="buscaCliente" prefHeight="100" prefWidth="250" />
+                <ListView fx:id="buscaCliente" prefHeight="100" prefWidth="250">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></ListView>
 
                 <Label style="-fx-font-size: 16;" text="Tipo de Serviço:">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin></Label>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Label>
                 <ComboBox fx:id="tipoServicoComboBox" prefWidth="250" promptText="Escolha o Serviço">
+                    <VBox.margin>
+                        <Insets top="-15.0" />
+                    </VBox.margin>
+                </ComboBox>
+
+                <!-- NOVO COMBOBOX PARA BARBEIRO -->
+                <Label style="-fx-font-size: 16;" text="Barbeiro:">
+                    <VBox.margin>
+                        <Insets bottom="-15.0" />
+                    </VBox.margin>
+                </Label>
+                <ComboBox fx:id="barbeiroComboBox" prefWidth="250" promptText="Selecione o Barbeiro">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin></ComboBox>
+                <!-- FIM DA ADIÇÃO -->
 
                 <Button onAction="#adicionarServico" prefHeight="38" prefWidth="250" text="Adicionar" />
-            <HBox.margin>
-               <Insets top="40.0" />
-            </HBox.margin>
+                <HBox.margin>
+                    <Insets top="40.0" />
+                </HBox.margin>
             </VBox>
 
             <!-- Lado direito: lista de serviços e total -->
             <VBox alignment="TOP_CENTER" prefHeight="568.0" prefWidth="300.0" spacing="15">
                 <ListView fx:id="listaServicos" prefHeight="250" prefWidth="300">
-               <VBox.margin>
-                  <Insets top="80.0" />
-               </VBox.margin></ListView>
+                    <VBox.margin>
+                        <Insets top="80.0" />
+                    </VBox.margin>
+                </ListView>
                 <Label fx:id="totalServicos" style="-fx-font-size: 16;" text=" Total: R$ 0.00">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Label>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
                 <Button onAction="#finalizarAtendimento" prefHeight="38" prefWidth="300" text="Finalizar Atendimento" />
-            <HBox.margin>
-               <Insets left="50.0" />
-            </HBox.margin>
+                <HBox.margin>
+                    <Insets left="50.0" />
+                </HBox.margin>
             </VBox>
         </HBox>
     </center>
@@ -76,14 +101,16 @@
                 <Insets bottom="20" left="40" right="40" top="20" />
             </padding>
             <Button onAction="#voltarMenu" prefHeight="38" prefWidth="120" text="Voltar" />
-            <Label fx:id="avisoServico" textAlignment="CENTER">
+            <Label fx:id="avisoServico" alignment="CENTER" maxWidth="500.0" prefWidth="500.0" textAlignment="CENTER">
                 <font>
                     <Font size="14.0" />
                 </font>
+            <HBox.margin>
+               <Insets left="200.0" />
+            </HBox.margin>
             </Label>
         </HBox>
     </bottom>
-
     <!-- Padding geral -->
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />

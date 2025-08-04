@@ -25,6 +25,9 @@ public class Usuario {
         this.isAdmin = false;
     }
 
+    public Usuario() {
+
+    }
 
 
     public int getId() { return id; }
@@ -36,4 +39,11 @@ public class Usuario {
     public void setNome(String nome) { this.nome = nome; }
     public void setSenha(String senha) { this.senha = senha; }
     public void setAdmin(boolean admin) { isAdmin = admin; }
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
+
 }
+

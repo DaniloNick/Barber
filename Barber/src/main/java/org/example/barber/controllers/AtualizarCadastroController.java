@@ -12,6 +12,8 @@ import org.example.barber.entities.Sessao;
 
 import java.io.IOException;
 
+import static org.example.barber.entities.Sessao.usuarioLogado;
+
 public class AtualizarCadastroController {
 
     @FXML
@@ -61,7 +63,7 @@ public class AtualizarCadastroController {
             mensagem.setStyle("-fx-text-fill: green;");
             mensagem.setText("Cadastro atualizado com sucesso!");
 
-            Sessao.usuarioLogado = usuario;
+            usuarioLogado = usuarioLogado;
 
             // Redireciona para o menu principal
             try {

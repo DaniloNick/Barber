@@ -26,6 +26,10 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
+    public Cliente() {
+
+    }
+
     public int getId() {
         return id;
     }

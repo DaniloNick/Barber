@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
         Usuario usuarioLogado = UsuarioDAO.validarLogin(nome, senha);
 
         if (usuarioLogado != null) {
-            Sessao.usuarioLogado = usuarioLogado.getNome();
+            Sessao.usuarioLogado = usuarioLogado;
 
             if (usuarioLogado.getNome().equals("admin") && usuarioLogado.getSenha().equals("123")) {
                 Application.trocarTela("atualizarCadastro.fxml", "Barber Shop - Atualizar Cadastro");

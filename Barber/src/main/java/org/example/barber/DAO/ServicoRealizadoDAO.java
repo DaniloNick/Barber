@@ -1,10 +1,7 @@
 package org.example.barber.DAO;
 
 import org.example.barber.controllers.RelatoriosController;
-import org.example.barber.entities.RelatorioItem;
-import org.example.barber.entities.ServicoRealizado;
-import org.example.barber.entities.Servico;
-import org.example.barber.entities.Cliente;
+import org.example.barber.entities.*;
 import org.example.barber.database.ConexaoSQLite;
 
 import java.sql.*;
@@ -50,7 +47,8 @@ public class ServicoRealizadoDAO {
                 int servicoId = rs.getInt("servico_id");
                 String servicoNome = rs.getString("servico_nome");
                 double servicoPreco = rs.getDouble("servico_preco");
-                String barbeiro = rs.getString("barbeiro");
+                String nomeBarbeiro = rs.getString("barbeiro");
+                Usuario barbeiro = UsuarioDAO.buscarPorNome(nomeBarbeiro);
                 double servicoComissao = rs.getDouble("servico_comissao");
 
                 // Criando o objeto Servico
@@ -81,7 +79,7 @@ public class ServicoRealizadoDAO {
             stmt.setInt(1, realizado.getCliente().getId());
             stmt.setInt(2, realizado.getServico().getId());
             stmt.setTimestamp(3, Timestamp.valueOf(realizado.getDataHora()));
-            stmt.setString(4, realizado.getBarbeiro());
+            stmt.setString(4, realizado.getBarbeiro().getNome());
 
             stmt.executeUpdate();
 
@@ -90,6 +88,70 @@ public class ServicoRealizadoDAO {
             e.printStackTrace();
         }
     }
+
+    public boolean excluir(int id) {
+        String sql = "DELETE FROM servicos_realizados WHERE id = ?";
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<ServicoRealizado> buscarPorBarbeiro(String termo) {
+        List<ServicoRealizado> lista = new ArrayList<>();
+        String sql = """
+        SELECT sr.id, sr.data_hora, sr.barbeiro, sr.servico_id, 
+               s.nome AS nomeServico, s.preco, 
+               u.nome AS nomeBarbeiro, c.nome AS nomeCliente
+        FROM servicos_realizados sr
+        JOIN servicos s ON sr.servico_id = s.id
+        JOIN usuarios u ON sr.barbeiro = u.nome
+        JOIN clientes c ON sr.cliente_id = c.id
+        WHERE u.nome LIKE ?
+        ORDER BY sr.data_hora DESC
+    """;
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + termo + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ServicoRealizado sr = new ServicoRealizado();
+                sr.setId(rs.getInt("id"));
+
+                long timestampMillis = rs.getLong("data_hora");
+                LocalDateTime dataHora = Instant.ofEpochMilli(timestampMillis)
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDateTime();
+                sr.setDataHora(dataHora);
+
+                Usuario barbeiro = new Usuario();
+                barbeiro.setNome(rs.getString("nomeBarbeiro"));
+                sr.setBarbeiro(barbeiro);
+
+                Servico servico = new Servico();
+                servico.setNome(rs.getString("nomeServico"));
+                servico.setPreco(rs.getDouble("preco"));
+                sr.setServico(servico);
+
+                Cliente cliente = new Cliente();
+                cliente.setNome(rs.getString("nomeCliente"));
+                sr.setCliente(cliente);
+
+                lista.add(sr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+
+
 
     public static RelatorioItem gerarRelatorio(String barbeiro, LocalDate dataInicial, LocalDate dataFinal, String periodoNome) {
         String sql = """
@@ -135,5 +197,45 @@ public class ServicoRealizadoDAO {
 
         // Caso não encontre dados, retorna zerado
         return new RelatorioItem(periodoNome, 0, 0.0, 0.0);
+    }
+
+    public List<ServicoRealizado> listarTodos() {
+        List<ServicoRealizado> lista = new ArrayList<>();
+        String sql = "SELECT sr.id, sr.data_hora, sr.barbeiro, sr.servico_id, " +
+                "s.nome AS nomeServico, s.preco, " +
+                "u.nome AS nomeBarbeiro " +
+                "FROM servicos_realizados sr " +
+                "JOIN servicos s ON sr.servico_id = s.id " +
+                "JOIN usuarios u ON sr.barbeiro = u.id " +
+                "ORDER BY sr.data_hora DESC";
+
+        try (Connection conn = ConexaoSQLite.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                ServicoRealizado sr = new ServicoRealizado();
+                sr.setId(rs.getInt("id"));
+                sr.setDataHora(rs.getTimestamp("data_hora").toLocalDateTime());
+
+                Servico servico = new Servico();
+                servico.setId(rs.getInt("servico_id"));
+
+                sr.getServico().setNome(rs.getString("nomeServico"));
+                sr.getServico().setPreco(rs.getDouble("preco"));
+                sr.setServico(servico);
+
+                Usuario barbeiro = new Usuario();
+                barbeiro.setId(rs.getInt("barbeiro")); // idem
+                sr.getBarbeiro().setNome(rs.getString("nomeBarbeiro"));
+                sr.setBarbeiro(barbeiro);
+
+                lista.add(sr);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 }
